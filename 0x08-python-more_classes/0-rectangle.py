@@ -2,5 +2,5 @@
 """
 An empty rectangle class, return nothing and has no paameters
 """
-def rectangle:
+def Rectangle:
     pass
