@@ -1,41 +1,18 @@
-import json
+#!/usr/bin/python3
 
-def add_items_to_list(items):
-    """Adds items to a list, removing duplicates.
+"""Add all arguments to a Python list and save them to a file."""
 
-    Args:
-        items: A list of items to add.
 
-    Returns:
-        list: The updated list with duplicates removed.
-    """
-
-    unique_items = list(set(items))
-    return unique_items
-
-def save_list_to_json(filename, items):
-    """Saves a list of items as a JSON file.
-
-    Args:
-        filename: The name of the JSON file to save to.
-        items: The list of items to save.
-    """
-
-    with open(filename, "w") as f:
-        json.dump(items, f)
-
-def main():
-    # Get arguments from command line or other sources
-    arguments = # ... Replace with your logic to get arguments ...
-
-    # Add items to a list, removing duplicates
-    items_list = add_items_to_list(arguments)
-
-    # Save the list as JSON
-    save_list_to_json("add_item.json", items_list)
-
-    print("Items saved to add_item.json:", items_list)
+import sys
 
 if __name__ == "__main__":
-    main()
+    save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
+    load_from_json_file = \
+        __import__('8-load_from_json_file').load_from_json_file
 
+    try:
+        items = load_from_json_file("add_item.json")
+    except FileNotFoundError:
+        items = []
+    items.extend(sys.argv[1:])
+    save_to_json_file(items, "add_item.json")
